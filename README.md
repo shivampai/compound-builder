@@ -1,1 +1,1 @@
-# compound-builder
+# Compound Builder & Visualizer
