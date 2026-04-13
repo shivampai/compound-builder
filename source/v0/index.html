@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Builder</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
+    <script src="ui.js"></script>
+</head>
+
+<body onload="load()">
+    <div class="main">
+        <div class="builder">
+
+            <div hidden class="scroll">
+                <div class="grid">
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+
+
+                    <div class="cell elem">H</div>
+                    <div class="cell bond">-</div>
+                    <div class="cell elem">C</div>
+                    <div class="cell bond">-</div>
+                    <div class="cell elem">C</div>
+                    <div class="cell bond">-</div>
+                    <div class="cell elem">H</div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                </div>
+            </div>
+            <svg id="builder" style="width: 90%;height:90%;" height="300" width="300"
+                xmlns="http://www.w3.org/2000/svg">
+                <style>
+                    g circle {
+                        cursor: pointer;
+                    }
+
+                    .add-btn:hover {
+                        transition: 0.3s;
+                        fill: rgb(215, 87, 40);
+                        cursor: pointer;
+                    }
+                </style>
+                <g style="display: none ;" id="approach-1">
+                    <g>
+                        <rect width="200" height="75" rx="10" ry="10" fill="lightblue" x="0" y="0">
+                        </rect>
+                        <text style="cursor: pointer;" x="100" y="37.5" text-anchor="middle"
+                            dominant-baseline="middle">Carbon</text>
+                        <circle r="5" cx="10" cy="37.5" fill="red" />
+                        <circle r="5" cx="100" cy="10" fill="red" />
+                        <circle r="5" cx="100" cy="65" fill="red" />
+                        <circle r="5" cx="190" cy="37.5" fill="black" />
+                    </g>
+                    <g>
+                        <rect width="200" height="75" rx="10" ry="10" fill="lightblue" x="200" y="200">
+                        </rect>
+                        <text style="cursor: pointer;" x="300" y="237.5" text-anchor="middle"
+                            dominant-baseline="middle">Carbon</text>
+                        <circle r="5" cx="210" cy="237.5" fill="black" />
+                        <circle r="5" cx="300" cy="210" fill="red" />
+                        <circle r="5" cx="300" cy="265" fill="red" />
+                        <circle r="5" cx="390" cy="237.5" fill="red" />
+                    </g>
+
+                    <g>
+                        <line x1="190" y1="37.5" x2="210" y2="237.5"
+                            style="stroke:black;stroke-width: 5px;cursor:pointer;"></line>
+
+                    </g>
+                </g>
+
+                <g id="builder-svg-main">
+                    <rect class="add-btn" data-dir="right" width="20" height="75" x="175" y="100" fill="coral"></rect>
+                    <rect class="add-btn" data-dir="left" width="20" height="75" x="80" y="100" fill="coral"></rect>
+                    <rect class="add-btn" data-dir="up" width="75" height="20" x="100" y="80" fill="coral"></rect>
+                    <rect class="add-btn" data-dir="down" width="75" height="20" x="100" y="175" fill="coral"></rect>
+
+                    <rect width="75" height="75" rx="0" ry="0" fill="lightblue" x="100" y="100">
+                    </rect>
+                    <text style="cursor: pointer;" x="137.5" y="137.5" text-anchor="middle"
+                        dominant-baseline="middle">C</text>
+                </g>
+                <!-- <foreignObject x="50" y="50" width="200" height="100">
+
+                        <body xmlns="http://www.w3.org/1999/xhtml">
+                            <button style="width:100%; height:100%;">
+                                Click Me
+                            </button>
+                        </body>
+                    </foreignObject> -->
+            </svg>
+            <div id="edit-element-window" class="window">
+                <div id="edit-element-window-header" class='window-header'>
+                    <span>Edit</span>
+                    <span class="window-close-btn"
+                        onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
+                </div>
+                <div class="window-body">
+
+                </div>
+            </div>
+            <button class="save-btn" onclick="exportSVG()">Export as .svg</button>
+        </div>
+        <div class="preview">
+            <svg id="preview" height="1000" width="1000" style="width: 100%;height:100%;"
+                xmlns="http://www.w3.org/2000/svg">
+                <style type="text/css">
+                    text {
+                        /* Specify the system or custom font to use */
+                        font-family: Arial, Helvetica, sans-serif;
+
+                        /* Add other styling */
+                        font-size: 24px;
+                        font-weight: bold;
+                        font-style: normal;
+                    }
+                </style>
+
+                <g style="display: none;">
+                    <line x1="50" y1="50" x2="112" y2="50" style="stroke:black;stroke-width:3;"></line>
+
+                    <circle r="12.5" cx="50" cy="50" fill="white" />
+                    <text x="50" y="50" font-size="30" text-anchor="middle" dominant-baseline="middle"
+                        fill="black">C</text>
+                    <circle r="12.5" cx="112" cy="50" fill="white" />
+                    <text x="112" y="50" font-size="30" text-anchor="middle" dominant-baseline="middle"
+                        fill="black">C</text>
+                </g>
+
+                <g id="preview-svg-main">
+                    <!-- <path d="M62 48 L102 48 Z" style="fill:none;stroke:black;stroke-width:3"></path> -->
+
+                </g>
+            </svg>
+        </div>
+    </div>
+</body>
+
+</html>
