@@ -49,6 +49,11 @@ elems = [
     { elem: 'H', params: { row: 2, col: 2, radical: false, positive_charge: 0, negative_charge: 0, lone_pair: 0 }, nodes_total: 4 },
     { elem: 'H', params: { row: 1, col: 4, radical: false, positive_charge: 0, negative_charge: 0, lone_pair: 0 }, nodes_total: 4 },
     { elem: 'H', params: { row: 0, col: 3, radical: false, positive_charge: 0, negative_charge: 0, lone_pair: 0 }, nodes_total: 4 },
+
+    { elem: 'H', params: { row: 3, col: 0, radical: false, positive_charge: 0, negative_charge: 0, lone_pair: 0 }, nodes_total: 4 },
+    { elem: 'C', params: { row: 3, col: 1, radical: false, positive_charge: 0, negative_charge: 0, lone_pair: 0 }, nodes_total: 4 },
+    { elem: 'N', params: { row: 3, col: 2, radical: false, positive_charge: 0, negative_charge: 0, lone_pair: 0 }, nodes_total: 4 },
+
 ]
 bonds = [
     null,
@@ -64,6 +69,9 @@ bonds = [
 
     { type: 0, from: 3, to: 9, params: {} },
     { type: 0, from: 3, to: 10, params: {} },
+
+    { type: 0, from: 11, to: 12, params: {} },
+    { type: 2, from: 12, to: 13, params: {} },
 ]
 builder_settings = {}
 function load() {
@@ -83,12 +91,12 @@ function refreshBuilder() {
         coord2 = bGrid.getSVGCoord(0, to.params.col, to.params.row)
         if (bonds[i].type == 0) { // 0 - SINGLE
             svg_elem.innerHTML += `<line x1="${coord1.center_x}" y1="${coord1.center_y}" x2="${coord2.center_x}" y2="${coord2.center_y}" style="stroke:black;stroke-width:${bGrid.elem_width / 5};"></line>`
-        }else if (bonds[i].type == 1) { // 1 - DOUBLE
-            svg_elem.innerHTML += `<line x1="${coord1.center_x}" y1="${coord1.center_y}" x2="${coord2.center_x}" y2="${coord2.center_y}" style="stroke:black;stroke-width:${3*bGrid.elem_width / 5};"></line>
+        } else if (bonds[i].type == 1) { // 1 - DOUBLE
+            svg_elem.innerHTML += `<line x1="${coord1.center_x}" y1="${coord1.center_y}" x2="${coord2.center_x}" y2="${coord2.center_y}" style="stroke:black;stroke-width:${3 * bGrid.elem_width / 5};"></line>
             <line x1="${coord1.center_x}" y1="${coord1.center_y}" x2="${coord2.center_x}" y2="${coord2.center_y}" style="stroke:white;stroke-width:${bGrid.elem_width / 5};"></line>`
-        }else if (bonds[i].type == 2) { // 2 - TRIPLE
+        } else if (bonds[i].type == 2) { // 2 - TRIPLE
             svg_elem.innerHTML += `<line x1="${coord1.center_x}" y1="${coord1.center_y}" x2="${coord2.center_x}" y2="${coord2.center_y}" style="stroke:black;stroke-width:${bGrid.elem_width};"></line>
-            <line x1="${coord1.center_x}" y1="${coord1.center_y}" x2="${coord2.center_x}" y2="${coord2.center_y}" style="stroke:white;stroke-width:${3*bGrid.elem_width / 5};"></line>
+            <line x1="${coord1.center_x}" y1="${coord1.center_y}" x2="${coord2.center_x}" y2="${coord2.center_y}" style="stroke:white;stroke-width:${3 * bGrid.elem_width / 5};"></line>
             <line x1="${coord1.center_x}" y1="${coord1.center_y}" x2="${coord2.center_x}" y2="${coord2.center_y}" style="stroke:black;stroke-width:${bGrid.elem_width / 5};"></line>`
         }
     }
